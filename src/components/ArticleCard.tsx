@@ -10,7 +10,7 @@ export default function ArticleCard({ article }: Props) {
       href={article.web_url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-white p-4 rounded shadow hover:bg-blue-50 transition mb-2"
+      className="block bg-white p-5 rounded-xl shadow-md hover:shadow-xl hover:bg-blue-50 hover:scale-[1.025] transition-all duration-200 ease-in-out mb-3 cursor-pointer"
     >
       <div className="text-xl font-semibold text-blue-700 hover:underline">
         {article.headline.main}
