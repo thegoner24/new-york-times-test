@@ -5,7 +5,6 @@ import ArticleCard from './components/ArticleCard';
 import SkeletonArticleCard from './components/SkeletonArticleCard';
 import DarkModeToggle from './components/DarkModeToggle';
 import type { Article } from './types/article';
-import ArticleDetail from './ArticleDetail';
 import './App.css';
 
 function ArticleList() {
@@ -31,7 +30,7 @@ function ArticleList() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-4">
+    <div className="min-h-screen flex flex-col items-center p-4">
       <DarkModeToggle />
       <h1 className="text-3xl font-bold my-4 font-nyt">NYT Article Search</h1>
       <form onSubmit={fetchArticles} className="w-full max-w-xl flex mb-6">
@@ -83,7 +82,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<ArticleList />} />
-      <Route path="/article/:id" element={<ArticleDetail />} />
     </Routes>
   );
 }
