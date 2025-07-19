@@ -7,7 +7,6 @@ A modern web application to search and view New York Times articles, built with 
 ## Table of Contents
 - [Features](#features)
 - [Demo](#demo)
-- [Screenshots](#screenshots)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [API & Environment](#api--environment)
@@ -26,10 +25,8 @@ A modern web application to search and view New York Times articles, built with 
 - 🧹 Linting and TypeScript strictness
 
 ## Demo
-> _Add your deployed link here if available._
+> [Click Here](https://new-york-times-test.vercel.app/)
 
-## Screenshots
-> _Add screenshots or GIFs of your app here._
 
 ## Getting Started
 
@@ -40,7 +37,7 @@ A modern web application to search and view New York Times articles, built with 
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/praisindo-test.git
+git clone https://github.com/thegoner24/new-york-times-test.git
 cd praisindo-test
 
 # Install dependencies
@@ -65,10 +62,26 @@ npm run build
 npm run preview
 ```
 
+### Testing
+```bash
+npm test
+```
+
 ### Linting
 ```bash
 npm run lint
 ```
+
+---
+
+## Troubleshooting
+
+- **ESM-only package errors**: If you see errors about ESM or `@tailwindcss/vite`, ensure your `package.json` contains:
+  ```json
+  "type": "module"
+  ```
+  (not `"_type": "module"`)
+- **Vite server not accessible**: If you get `ERR_CONNECTION_TIMED_OUT`, make sure the dev server is running and accessible at http://localhost:5173/. Try `npm run dev -- --host` if accessing from another device or VM.
 
 ---
 
