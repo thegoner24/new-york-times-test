@@ -2,7 +2,7 @@
   "name": "praisindo-test",
   "private": true,
   "version": "0.0.0",
-  "_type": "module",
+  "type": "module",
   "scripts": {
     "test": "jest --config jest.config.cjs",
     "test:watch": "jest --config jest.config.cjs --watchAll",
