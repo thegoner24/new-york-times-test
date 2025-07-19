@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Mock react-router-dom components
 export const Routes = ({ children }: { children: React.ReactNode }) => <>{children}</>;
 export const Route = ({ element }: { element: React.ReactNode }) => <>{element}</>;
 export const Link = ({ to, children }: { to: string; children: React.ReactNode }) => (

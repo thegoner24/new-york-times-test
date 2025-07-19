@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Custom Animations */
+
 @keyframes fade-in-slow {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -48,7 +48,7 @@ body {
   }
 }
 
-/* Dark mode styles */
+
 body.dark {
   background-color: #18181b !important;
   color: #f3f4f6;

@@ -1,8 +1,6 @@
 import type { Article } from '../types/article';
 
-// Mock implementation of searchArticles
 export const searchArticles = jest.fn().mockImplementation(async (_query: string): Promise<Article[]> => {
-  // Return mock data
   return [
     {
       _id: 'test-article-id',

@@ -5,7 +5,6 @@ import DarkModeToggle from '../components/DarkModeToggle';
 import BackToTopButton from '../components/BackToTopButton';
 import type { Article } from '../types/article';
 
-// Mock App component that doesn't rely on nytService or react-router
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [articles, setArticles] = useState<Article[]>([]);
@@ -20,9 +19,7 @@ export default function App() {
     setError('');
     
     try {
-      // Mock search functionality
       setTimeout(() => {
-        // If search term is 'error', simulate an error
         if (searchTerm.toLowerCase() === 'error') {
           setError('Failed to fetch articles');
           setArticles([]);

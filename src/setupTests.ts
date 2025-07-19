@@ -1,7 +1,5 @@
-// setupTests.ts
 import '@testing-library/jest-dom';
 
-// Set up global mocks
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({
@@ -16,7 +14,6 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-// Add TextEncoder/TextDecoder polyfill for react-router
 if (typeof TextEncoder === 'undefined') {
   global.TextEncoder = require('util').TextEncoder;
 }

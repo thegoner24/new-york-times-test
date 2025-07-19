@@ -5,6 +5,7 @@ import ArticleCard from './components/ArticleCard';
 import SkeletonArticleCard from './components/SkeletonArticleCard';
 import DarkModeToggle from './components/DarkModeToggle';
 import BackToTopButton from './components/BackToTopButton';
+import NewsFilter from './components/NewsFilter';
 import type { Article } from './types/article';
 import './App.css';
 
@@ -13,6 +14,23 @@ function ArticleList() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [filters, setFilters] = useState<{ author: string; date: string }>({ author: '', date: '' });
+
+ 
+  const authorList = Array.from(
+    new Set(articles.map((a: Article) => a.byline?.original).filter(Boolean))
+  ) as string[];
+
+
+  const filteredArticles = articles.filter((article: Article) => {
+    let match = true;
+    if (filters.author && article.byline?.original !== filters.author) match = false;
+    if (filters.date && article.pub_date) {
+      const articleDate = new Date(article.pub_date).toISOString().slice(0, 10);
+      if (articleDate !== filters.date) match = false;
+    }
+    return match;
+  });
 
   const fetchArticles = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -34,7 +52,6 @@ function ArticleList() {
     <>
       <div className="min-h-screen flex flex-col items-center p-4 animate-fade-in-slow">
         <DarkModeToggle />
-        <h1 className="text-3xl font-bold my-4 font-nyt">NYT Article Search</h1>
         <form onSubmit={fetchArticles} className="w-full max-w-xl flex mb-6 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
           <input
             className="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm transition-all duration-200"
@@ -51,30 +68,25 @@ function ArticleList() {
             {loading ? 'Searching...' : 'Search'}
           </button>
         </form>
-        {error && (
-      <div className="mb-4 flex items-center justify-center">
-        <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded shadow flex items-center gap-2 animate-fade-in">
-          <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" /></svg>
-          <span>{error}</span>
-        </div>
-      </div>
-    )}
+        {(articles.length > 0 || loading) && (
+          <NewsFilter authors={authorList} onFilter={setFilters} />
+        )}
         <div className="w-full max-w-xl space-y-4">
-        {articles.length === 0 && !loading && !error && (
+        {filteredArticles.length === 0 && !loading && !error && (
           <div className="text-gray-500 text-center">No articles found. Try searching!</div>
         )}
         {loading && (
-  <>
-    {Array.from({ length: 5 }).map((_, idx) => (
-      <SkeletonArticleCard key={idx} />
-    ))}
-  </>
-)}
-{!loading && articles.map(article => (
-  <div className="animate-slide-fade-in" key={article._id}>
-    <ArticleCard article={article} />
-  </div>
-))}
+          <>
+            {Array.from({ length: 5 }).map((_, idx) => (
+              <SkeletonArticleCard key={idx} />
+            ))}
+          </>
+        )}
+        {!loading && filteredArticles.map(article => (
+          <div className="animate-slide-fade-in" key={article._id}>
+            <ArticleCard article={article} />
+          </div>
+        ))}
       </div>
       <BackToTopButton />
     </div>
